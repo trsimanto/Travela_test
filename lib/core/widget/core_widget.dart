@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 
 import '../config/theme/color.dart';
@@ -44,10 +45,10 @@ redToast(String msg) {
       fontSize: 14.0);
 }
 
-Widget bigButton(Function onTap, {bool isLoading = false}) =>
+Widget bigButton(Function buttonTap, {bool isLoading = false}) =>
     GestureDetector(
       onTap: () {
-        // Handle continue action
+        buttonTap.call();
       },
       child: Container(
         height: 56,
@@ -89,3 +90,51 @@ Widget logo({double height = 100}) {
     width: double.infinity,
   );
 }
+
+Widget searchButton()=> InkWell(
+    onTap: () {
+      // Handle button press
+      print("Search Button Pressed");
+    },
+    borderRadius: BorderRadius.circular(30),
+    child: Container(
+      margin: EdgeInsets.all(16),
+      width: double.infinity,
+      height: 56,
+      padding: EdgeInsets.symmetric(vertical: 12, horizontal: 20),
+      decoration: BoxDecoration(
+        color: Colors.white,
+        borderRadius: BorderRadius.circular(30), // Rounded edges
+        boxShadow: [
+          BoxShadow(
+            color: Colors.black12, // Shadow color
+            blurRadius: 10, // Shadow blur
+            offset: Offset(0, 5), // Shadow position
+          ),
+        ],
+      ),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          SvgPicture.asset(
+            getSvg(
+              TrImageEnumsKeys.search,
+            ),
+            colorFilter:
+            ColorFilter.mode(AppColors.black19, BlendMode.srcIn),
+            width: 28,
+            height: 28,
+          ),
+          // Search Icon
+          Text(
+            "Search",
+            style: TextStyle(
+              fontSize: 18,
+              fontWeight: FontWeight.w600,
+              color: AppColors.black19,
+            ),
+          ),
+          SizedBox(width: 24,)
+        ],
+      ),
+    ));

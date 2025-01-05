@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:get/get_core/src/get_main.dart';
 import 'package:intl_phone_field/intl_phone_field.dart';
+import 'package:travela/feature/dashboard/page/dashboard.dart';
 
 import '../../../../core/widget/core_widget.dart';
 import '../../../../core/widget/custom_widget.dart';
@@ -74,8 +77,8 @@ class LoginScreen extends StatelessWidget {
                     },
                   ),
                   const Spacer(),
-                  bigButton((){
-
+                  bigButton(() {
+                    Get.offAll(DashboardScreen());
                   }),
                   sH16(),
                 ],

@@ -1,10 +1,20 @@
 import 'package:flutter/material.dart';
-import 'package:get/get_navigation/src/root/get_material_app.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:get/get.dart';
+import 'package:travela/core/config/theme/color.dart';
+import 'package:travela/feature/aurh/login/view/login.dart';
+import 'feature/dashboard/child/explore/presentation/bloc/campaign_bloc.dart';
+import 'feature/dashboard/child/explore/presentation/bloc/listing_bloc.dart';
+import 'feature/dashboard/child/explore/presentation/page/explore.dart';
 
-import 'core/config/theme/color.dart';
-import 'feature/aurh/login/view/login.dart';
+import 'injection_container.dart' as di;
 
-void main() {
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+
+  // Initialize dependencies
+  await di.init();
+
   runApp(const MyApp());
 }
 
@@ -13,15 +23,23 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return GetMaterialApp(
-      debugShowCheckedModeBanner: false,
-      title: 'Travela',
-      theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: AppColors.brandPink6D),
-        useMaterial3: true,
+    return MultiBlocProvider(
+      providers: [
+        BlocProvider(
+          create: (_) => di.sl<CampaignBloc>()..add(GetCampaignsEvent()),
+        ),
+        BlocProvider(
+          create: (_) => di.sl<ListingBloc>(),
+        ),
+      ],
+      child: GetMaterialApp(
+        debugShowCheckedModeBanner: false,
+        title: 'TravelA Campaigns',
+        theme: ThemeData(
+          primarySwatch: Colors.pink,
+        ),
+        home: LoginScreen(),
       ),
-      home: LoginScreen()
     );
   }
 }
-

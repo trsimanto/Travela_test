@@ -3,6 +3,11 @@ import '../values/icons/tr_icons.dart';
 
 enum TrImageEnumsKeys {
   topLogo,
+  booking,
+  inbox,
+  profile,
+  host,
+  search
 
 }
 
