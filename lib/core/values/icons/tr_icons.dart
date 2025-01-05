@@ -1,5 +1,9 @@
 Map<String, String> trIconsSvg = {
-  "email": "assets/icons/email.svg",
+  "search": "assets/icons/search.svg",
+  "booking": "assets/icons/booking.svg",
+  "inbox": "assets/icons/inbox.svg",
+  "profile": "assets/icons/profile.svg",
+  "host": "assets/icons/host.svg",
 };
 
 
